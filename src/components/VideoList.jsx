@@ -8,10 +8,13 @@ var VideoList = (props) => (
   //   <div><h5><em>videoListEntry</em> view goes here</h5></div>
   // </div>
 
+  <div className="video-list">
+    {props.videos.map((video) =>
+      <VideoListEntry video={video} />
+    )}
 
-  props.videos.map(function(video){
-    return <div><h5><em>{video.title}</em></h5></div>
-  });
+  </div>
+
 
 
 );
