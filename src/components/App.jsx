@@ -12,19 +12,38 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount(){
+    this.getYouTubeVideos('kittens')
+  }
+
+  getYouTubeVideos(query) {
+    var options = {
+      key: this.props.API_KEY,
+      query: query
+    }
+    this.props.searchYoutube(options, (videos) => {
+      this.setState({
+        currentVideo: videos[0]
+        videoList: videos
+      });
+    });
+  }
+
   handleVideoListClicks(video) {
     this.setState({
-      currentVideo: video
+      currentVideo: video,
+      videos: exampleVideoData
     });
   }
 
   render(){
     return (
       <div>
-      <nav className="navbar">
+
+      <nav className="navbar" handleSearchInputChange={this.getYouTubeVideos.bind(this)}>
         <div className="col-md-6 offset-md-3">
           {/* <div><h5><em>search</em> view goes here</h5></  div> */}
-          <Search />
+          <Search handleSearchInputChange={handleSearchInputChange}/>
         </div>
       </nav>
       <div className="row">
